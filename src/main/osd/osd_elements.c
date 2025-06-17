@@ -492,13 +492,15 @@ bool osdFormatRtcDateTime(char *buffer)
 void osdFormatTime(char * buff, osd_timer_precision_e precision, timeUs_t time)
 {
     int seconds = time / 1000000;
+    int milliseconds = time / 1000;
     const int minutes = seconds / 60;
     seconds = seconds % 60;
 
     switch (precision) {
     case OSD_TIMER_PREC_SECOND:
     default:
-        tfp_sprintf(buff, "%02d:%02d", minutes, seconds);
+        // tfp_sprintf(buff, "%02d:%02d", minutes, seconds);
+        tfp_sprintf(buff, "%02d:%02d.%03d", minutes, seconds, milliseconds);
         break;
     case OSD_TIMER_PREC_HUNDREDTHS:
         {
